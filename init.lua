@@ -219,7 +219,9 @@ local function Transaction(data, loadUser)
 		hash = data.idHash,
 		created = fromISO(data.created),
 		pending = data.isPending,
-		user = (loadUser and ropi.GetUser(data.agent.id)) or {id = data.agent.id},
+		user = (loadUser and ropi.GetUser(data.agent.id)) or {
+			id = data.agent.id
+		},
 		item = {
 			name = data.details.name,
 			id = data.details.id,
@@ -442,7 +444,9 @@ function ropi.GetToken()
 		api = "itemconfiguration",
 		method = "PATCH",
 		endpoint = "collectibles/xcsrftoken",
-		domains = {"roblox"},
+		domains = {
+			"roblox"
+		},
 		expectedCode = 403,
 		headers = {
 			{
@@ -549,7 +553,9 @@ function ropi.GetAvatarHeadShot(id, opts, refresh)
 		return nil, Error(400, "An invalid ID was provided to GetAvatarHeadShot.")
 	end
 
-	local avatars, error = ropi.GetAvatarHeadShots({id}, opts, refresh)
+	local avatars, error = ropi.GetAvatarHeadShots({
+		id
+	}, opts, refresh)
 
 	if not error and type(avatars) == "table" and avatars[id] then
 		return avatars[id]
@@ -854,7 +860,11 @@ function ropi.SearchUser(name, refresh)
 		return ropi.GetUser(name, refresh)
 	end
 
-	local users = ropi.SearchUsers({name}, {fullObject = true}, refresh)
+	local users = ropi.SearchUsers({
+		name
+	}, {
+		fullObject = true
+	}, refresh)
 
 	if type(users) == "table" and users[1] then
 		return users[1]
